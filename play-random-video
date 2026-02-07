@@ -6,7 +6,7 @@ import random
 import subprocess
 
 # Absolute path to the directory containing video files
-VIDEO_DIR = "/home/Disk/files/New folder/"
+VIDEO_DIR = "/home/Disk/files/Example address/"
 
 # Collect all regular files in the directory (ignore subdirectories)
 files = [
