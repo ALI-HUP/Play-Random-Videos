@@ -1,0 +1,40 @@
+
+#!/usr/bin/env python3
+
+import os
+import random
+import subprocess
+
+VIDEO_DIR = "/home/ali/Disk/Programing/html/New folder/New folder/New folder/New folder"
+
+files = [
+    f for f in os.listdir(VIDEO_DIR)
+    if os.path.isfile(os.path.join(VIDEO_DIR, f))
+]
+
+if not files:
+    raise RuntimeError("Folder is empty")
+
+selected_video = random.choice(files)
+video_path = os.path.join(VIDEO_DIR, selected_video)
+
+subprocess.run(["mpv", video_path])
+
+_, ext = os.path.splitext(selected_video)
+
+def generate_unique_name():
+    while True:
+        first_digit = random.randint(1, 9)
+        other_digits = random.randint(0, 10**15 - 1)
+        number = f"{first_digit}{other_digits:015d}"
+        new_name = number + ext
+        new_path = os.path.join(VIDEO_DIR, new_name)
+
+        if not os.path.exists(new_path):
+            return new_name
+
+new_filename = generate_unique_name()
+new_path = os.path.join(VIDEO_DIR, new_filename)
+
+os.rename(video_path, new_path)
+
